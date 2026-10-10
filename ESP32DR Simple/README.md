@@ -63,6 +63,38 @@ Le fond et le couvercle d'une même ligne vont ensemble : ne pas mélanger les d
 - PLA ou PETG, couche de 0,2 mm, 3 parois, remplissage 15 à 20 %.
 - La fenêtre RJ11 du fond est fermée par un pont de 15 mm, qui s'imprime sans support.
 
+## Faire ressortir les inscriptions
+
+Les inscriptions sont gravées sur **0,6 mm de profondeur**, soit exactement 3 couches de 0,2 mm.
+Comme le couvercle s'imprime face extérieure sur le plateau, les lettres sont des creux dans les
+3 premières couches : il suffit d'imprimer la suite dans une autre couleur pour qu'elle apparaisse
+au fond des lettres, à fleur de surface.
+
+![Couvercle avec inscriptions de couleur](images/couvercle_lettres_bicolores.png)
+
+**1. Changement de filament en cours d'impression (toute imprimante, la plus simple)**
+
+Dans le trancheur (PrusaSlicer, OrcaSlicer, Bambu Studio, Cura…), ajoutez un **changement de couleur
+(ou une pause) au début de la couche à 0,6 mm**, c'est-à-dire la 4ᵉ couche. Imprimez les 3 premières
+couches dans la couleur du boîtier, puis le reste dans la couleur des lettres (ou l'inverse).
+Une seule pièce, un seul changement. Avec une hauteur de couche différente de 0,2 mm, mettez
+`grav_prof` à un multiple de cette hauteur et régénérez le couvercle.
+
+**2. Incrustation multimatériau (imprimantes multicolores : AMS, MMU…)**
+
+Les fichiers `stl/esp32dr_lettres_sans_oled.stl` et `stl/esp32dr_lettres_oled.stl` contiennent
+uniquement les lettres, qui remplissent exactement les gravures. Importez le couvercle puis ajoutez
+le fichier de lettres **comme pièce du même objet** (« ajouter une pièce » / « add part »), sans le
+déplacer, et attribuez-lui un autre filament. Les lettres sont alors pleines et le couvercle reste
+d'une couleur à l'intérieur. Le même fichier de lettres convient aux deux hauteurs de boîtier
+(ESP32 sur barrettes ou soudé).
+
+**3. Après impression**
+
+Passer de la peinture acrylique, un feutre peinture ou de la cire colorée dans les gravures, puis
+essuyer la surface avec un chiffon légèrement humide (ou poncer très légèrement au grain fin)
+pour ne laisser la couleur qu'au fond des lettres.
+
 ## Montage
 
 1. Poser la carte sur les quatre entretoises du fond. Le pion de centrage entre dans le trou de fixation
@@ -78,7 +110,7 @@ visibles, soudez-les sur pattes longues afin que leur tête affleure dans les tr
 
 | Paramètre | Rôle | Défaut |
 |---|---|---|
-| `piece` | `"fond"`, `"couvercle"`, `"assemblage"` (aperçu) ou `"decoupes"` (contrôle 2D) | `"assemblage"` |
+| `piece` | `"fond"`, `"couvercle"`, `"lettres"` (incrustation), `"assemblage"` (aperçu) ou `"decoupes"` (contrôle 2D) | `"assemblage"` |
 | `oled` | couvercle avec fenêtre d'écran au lieu des trous de réglage | `false` |
 | `esp_sur_supports` | ESP32 enfiché sur barrettes (`true`) ou soudé (`false`) | `true` |
 | `usb_z` | hauteur du centre de la prise USB au-dessus de la carte | 14 / 5,5 mm |
@@ -87,6 +119,7 @@ visibles, soudez-les sur pattes longues afin que leur tête affleure dans les tr
 | `boutons` | ajoute des trous d'accès aux boutons EN / BOOT de l'ESP32 | `false` |
 | `oled_c`, `oled_t` | centre et taille de la fenêtre OLED | [48,26 ; 31] et 30 × 17 mm |
 | `aeration`, `gravure` | fentes d'aération et textes gravés | `true` |
+| `grav_prof` | profondeur de gravure (multiple de la hauteur de couche) | 0,6 mm |
 
 À vérifier sur votre carte avant d'imprimer si vos composants diffèrent : hauteur de la prise USB
 de votre DevKit (micro-USB ou USB-C), hauteur de la prise RJ11 et position de l'écran OLED.
@@ -97,6 +130,8 @@ leur alignement.
 
 ## Historique
 
+- **v3** : gravure portée à 0,6 mm (3 couches) pour l'impression bicolore ; ajout des fichiers de
+  lettres pour l'incrustation multimatériau. Géométrie du couvercle inchangée par ailleurs.
 - **v2** : couvercles corrigés (la v1 était exportée en miroir) ; trous EN / BOOT retirés par défaut.
 - **v1** : première version.
 
@@ -105,9 +140,11 @@ leur alignement.
 Ce boîtier (source OpenSCAD, STL, images et ce README) a été **généré par IA** (Claude, d'Anthropic)
 à la demande de ranaud80.
 
-- **Vérifié sur impression réelle** : le fond (`esp32dr_fond.stl`, version ESP32 sur barrettes).
-- **Corrigé après essai** : les couvercles (v2).
-- **Pas encore vérifié** : couvercles v2 imprimés, version ESP32 soudé, position de la fenêtre OLED.
+- **Vérifié sur impression réelle** : le fond (`esp32dr_fond.stl`) et le couvercle sans afficheur
+  (v2, version ESP32 sur barrettes). La v3 ne diffère de ce couvercle validé que par la profondeur
+  de gravure (0,6 mm au lieu de 0,5 mm).
+- **Pas encore vérifié** : impression bicolore des inscriptions, couvercle avec afficheur et position
+  de la fenêtre OLED, version ESP32 soudé.
 
 ## Licence et crédits
 

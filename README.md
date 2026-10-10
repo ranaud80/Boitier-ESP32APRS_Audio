@@ -15,7 +15,7 @@ Chaque carte a son propre répertoire.
 
 | Carte | Description | Répertoire | État |
 |---|---|---|---|
-| **ESP32DR Simple** | Interface 64 × 58 mm : ESP32 DevKit, prise RJ11 vers le poste radio, écran OLED 1,3" en option | [`ESP32DR Simple/`](ESP32DR%20Simple/) | Disponible, fond imprimé et validé |
+| **ESP32DR Simple** | Interface 64 × 58 mm : ESP32 DevKit, prise RJ11 vers le poste radio, écran OLED 1,3" en option | [`ESP32DR Simple/`](ESP32DR%20Simple/) | Disponible, fond et couvercle sans afficheur imprimés et validés |
 | **ESP32DR SA868** | Carte ESP32 avec module radio SA868 / SA818 intégré | — | À venir |
 | **ESP32-C3 + GPS** | Version compacte à ESP32-C3 avec GPS (tracker) | — | À venir |
 

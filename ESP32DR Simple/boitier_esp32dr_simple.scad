@@ -15,7 +15,7 @@
 // =====================================================================
 
 /* [Pièce à générer] */
-// "fond", "couvercle", "assemblage" (aperçu), "decoupes" (contrôle 2D)
+// "fond", "couvercle", "lettres" (incrustation multicolore), "assemblage" (aperçu), "decoupes" (contrôle 2D)
 piece = "assemblage";
 // Couvercle avec fenêtre pour écran OLED 1,3" (sinon : trous de réglage SPK/MIC)
 oled = false;
@@ -51,6 +51,9 @@ btn_d  = 3.5;     // diamètre de ces trous
 pot_d  = 4.5;     // trous de réglage des ajustables
 aeration = true;  // fentes d'aération au-dessus de l'ESP32
 gravure  = true;  // textes gravés sur le couvercle
+// Profondeur de gravure : multiple de la hauteur de couche (0,6 = 3 couches de 0,2)
+// pour un changement de couleur net à cette hauteur
+grav_prof = 0.6;
 // Fenêtre OLED : centre et taille (zone active 29,4 x 14,7 d'un SH1106 1,3")
 oled_c = [48.26, 31.0];
 oled_t = [30.0, 17.0];
@@ -120,9 +123,19 @@ module fond() {
 
 // ----------------------------------------------------------- couvercle
 module texte(t, taille = 3.2, ha = "center") {
-  translate([0, 0, z_bac + couv_ep - 0.5])
-    linear_extrude(1) text(t, size = taille, halign = ha, valign = "center",
-                           font = "Liberation Sans:style=Bold");
+  linear_extrude(1) text(t, size = taille, halign = ha, valign = "center",
+                         font = "Liberation Sans:style=Bold");
+}
+// toutes les inscriptions, de z = 0 à 1 (positionnées ensuite)
+module textes() {
+  for (l = LEDS) translate([l[0] - 3.2, l[1]]) texte(l[2], 3.0, "right");
+  if (boutons) for (b = BTNS) translate([b[0], b[1] + 4.6]) texte(b[2], 2.6);
+  if (!oled) for (p = POTS) translate([p[0] - 4, p[1]]) texte(p[2], 3.0, "right");
+  translate([48, 53.5]) texte("ESP32DR", 4.0);
+}
+// incrustation : remplit exactement les gravures (impression multicolore)
+module lettres() {
+  translate([0, 0, z_bac + couv_ep - grav_prof]) scale([1, 1, grav_prof]) textes();
 }
 module decoupes_couvercle() {       // en 2D, coordonnées carte
   for (l = LEDS) translate([l[0], l[1]]) circle(d = led_d);
@@ -148,12 +161,7 @@ module couvercle() {
     translate([0, 0, z_bac - levre_h - 1]) linear_extrude(levre_h + couv_ep + 2) decoupes_couvercle();
     // la lèvre ne doit pas gêner la fiche USB
     translate([USB_X - usb_l / 2 - 0.5, y0 - 1, z_bac - levre_h - 1]) cube([usb_l + 1, 4, levre_h + 1]);
-    if (gravure) {
-      for (l = LEDS) translate([l[0] - 3.2, l[1]]) texte(l[2], 3.0, "right");
-      if (boutons) for (b = BTNS) translate([b[0], b[1] + 4.6]) texte(b[2], 2.6);
-      if (!oled) for (p = POTS) translate([p[0] - 4, p[1]]) texte(p[2], 3.0, "right");
-      translate([48, 53.5]) texte("ESP32DR", 4.0);
-    }
+    if (gravure) translate([0, 0, z_bac + couv_ep - grav_prof]) textes();
   }
 }
 
@@ -178,6 +186,8 @@ module carte() {
 if (piece == "fond") fond();
 else if (piece == "couvercle")        // retourné (rotation, pas miroir), prêt à imprimer
   translate([0, PCB[1], z_bac + couv_ep]) rotate([180, 0, 0]) couvercle();
+else if (piece == "lettres")          // même repère que "couvercle"
+  translate([0, PCB[1], z_bac + couv_ep]) rotate([180, 0, 0]) lettres();
 else if (piece == "decoupes") decoupes_couvercle();
 else {
   fond();

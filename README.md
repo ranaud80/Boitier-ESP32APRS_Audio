@@ -30,8 +30,36 @@ Chaque carte a son propre répertoire.
 Pour modifier un boîtier : ouvrir le `.scad`, changer les paramètres en tête de fichier,
 puis aperçu (F5), rendu (F6) et export STL (F7).
 
+## Contenu généré par IA
+
+Par transparence : les boîtiers de ce dépôt ont été **conçus et générés par une IA**
+(Claude, d'Anthropic) à la demande de ranaud80, qui en a fixé le cahier des charges,
+imprimé et testé les pièces, et demandé les corrections.
+
+| Élément | Origine |
+|---|---|
+| Sources OpenSCAD (`.scad`), fichiers STL, images d'aperçu | Générés par IA |
+| Textes des README | Rédigés par IA |
+| Relevé des cotes sur les Gerber du projet d'origine | Effectué par IA |
+| Cahier des charges, choix des versions, impression et validation sur la carte réelle | ranaud80 |
+
+Chaque README de carte indique ce qui a été vérifié sur une impression réelle et ce qui ne l'a pas encore été.
+
+## Licence
+
+Les boîtiers (sources OpenSCAD, STL, images, textes) sont publiés sous licence
+**[Creative Commons Attribution - Partage dans les mêmes conditions 4.0 International (CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.fr)** :
+vous pouvez les imprimer, les modifier et les redistribuer, y compris pour un usage commercial,
+à condition de citer ce dépôt et de partager vos modifications sous la même licence.
+Texte complet : [`LICENSE`](LICENSE).
+
+**Exception :** les images de contrôle `controle_ouvertures.png` contiennent un tracé de la sérigraphie
+et des perçages des cartes, tiré des fichiers Gerber du projet d'origine. Elles relèvent donc de la
+licence **GPL-3.0** de ce projet.
+
 ## Crédits
 
 - Cartes électroniques et firmware : [nakhonthai/ESP32APRS_Audio](https://github.com/nakhonthai/ESP32APRS_Audio), © Somkiat Nakhonthai (HS5TQA), licence GPL-3.0.
-- Boîtiers : conçus spécialement pour ce dépôt. Les cotes des cartes (contour, trous de fixation,
-  position des connecteurs) ont été relevées sur les fichiers Gerber publiés dans le dépôt d'origine.
+- Boîtiers : conçus spécialement pour ce dépôt, sans réutiliser de fichier du projet d'origine. Les cotes
+  des cartes (contour, trous de fixation, position des connecteurs) ont été relevées sur les fichiers
+  Gerber publiés dans le dépôt d'origine.

@@ -100,9 +100,20 @@ leur alignement.
 - **v2** : couvercles corrigés (la v1 était exportée en miroir) ; trous EN / BOOT retirés par défaut.
 - **v1** : première version.
 
-## Crédits
+## Contenu généré par IA
 
+Ce boîtier (source OpenSCAD, STL, images et ce README) a été **généré par IA** (Claude, d'Anthropic)
+à la demande de ranaud80.
+
+- **Vérifié sur impression réelle** : le fond (`esp32dr_fond.stl`, version ESP32 sur barrettes).
+- **Corrigé après essai** : les couvercles (v2).
+- **Pas encore vérifié** : couvercles v2 imprimés, version ESP32 soudé, position de la fenêtre OLED.
+
+## Licence et crédits
+
+- Boîtier : licence [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.fr), voir [`LICENSE`](../LICENSE).
 - Carte ESP32DR Simple : © Somkiat Nakhonthai (HS5TQA), projet
   [ESP32APRS_Audio](https://github.com/nakhonthai/ESP32APRS_Audio), licence GPL-3.0.
-- L'image `images/controle_ouvertures.png` contient un tracé de la sérigraphie et des perçages issus
-  des Gerber de ce projet ; elle est donc soumise à la licence GPL-3.0 du projet d'origine.
+- **Exception :** l'image `images/controle_ouvertures.png` contient un tracé de la sérigraphie et des
+  perçages issus des Gerber de ce projet ; elle relève donc de la licence GPL-3.0 du projet d'origine,
+  et non de la CC BY-SA 4.0.

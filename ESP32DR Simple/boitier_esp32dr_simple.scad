@@ -7,6 +7,11 @@
 //
 //  Pièces : fond (bac) + couvercle. Impression sans supports.
 //  Visserie : 3 vis M3 x 12 (tête cylindrique ou bombée) par le dessous.
+//
+//  Dépôt   : https://github.com/ranaud80/Boitier-ESP32APRS_Audio
+//  Licence : CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
+//  Ce fichier a été généré par IA (Claude, Anthropic) à la demande de
+//  ranaud80, puis testé par impression réelle (fond validé).
 // =====================================================================
 
 /* [Pièce à générer] */
